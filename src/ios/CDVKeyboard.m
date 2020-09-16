@@ -182,6 +182,11 @@ static IMP WKOriginalImp;
     statusBar = [self.webView convertRect:statusBar fromView:nil];
     screen = [self.webView convertRect:screen fromView:nil];
 
+    // If x is less than 0, we should do nothing because displayed iOS13 half modal.
+    if (screen.origin.x < 0) {
+        return;
+    }
+
     // if the webview is below the status bar, offset and shrink its frame
     if ([self settingForKey:@"StatusBarOverlaysWebView"] != nil && ![[self settingForKey:@"StatusBarOverlaysWebView"] boolValue]) {
         CGRect full, remainder;
